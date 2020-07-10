@@ -1,0 +1,189 @@
+body,
+html {
+    height: 100%;
+    margin: 0;
+    /* font-family: Arial, Helvetica, sans-serif; */
+    background-color: #59595F;
+}
+
+.login {
+    align-items: center;
+    justify-content: center;
+}
+
+.registrasi {
+    align-items: center;
+    justify-content: center;
+    /* margin-top: 5%; */
+}
+
+.nav {
+    background-color: #3D3D3D;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    font-family: 'Roboto';
+    font-size: 16px;
+    color: #DBCFB0;
+}
+
+ul.nav.justify-content-end {
+    background-color: #3D3D3D;
+}
+
+.hero-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.pexels.com/photos/3785784/pexels-photo-3785784.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(60%, -50%);
+    color: white;
+    font-family: 'Muli';
+    font-size: 22px;
+}
+
+.card {
+    font-family: 'Roboto';
+}
+
+.hero-text button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 10px 25px;
+    color: black;
+    background-color: #ddd;
+    text-align: center;
+    cursor: pointer;
+}
+
+.hero-text button:hover {
+    background-color: #555;
+    color: white;
+    font-size: 20px;
+}
+
+.profile {
+    transform: translate(60%, 10%);
+    font-family: 'Roboto';
+}
+
+.media {
+    padding: 10px;
+    border: 5px;
+    /* border-style: solid; */
+    /* width: 1000px; */
+    background-color: #F5F5F5;
+}
+
+.media-body {
+    padding-left: 10px;
+    font-family: 'Roboto';
+    /* transform: translate(60%, -50%); */
+}
+
+table tr {
+    padding-bottom: 10px;
+}
+
+ol.progtrckr {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+ol.progtrckr li {
+    display: inline-block;
+    text-align: center;
+    line-height: 3.5em;
+}
+
+ol.progtrckr[data-progtrckr-steps="2"] li {
+    width: 49%;
+}
+
+ol.progtrckr[data-progtrckr-steps="3"] li {
+    width: 33%;
+}
+
+ol.progtrckr[data-progtrckr-steps="4"] li {
+    width: 24%;
+}
+
+ol.progtrckr[data-progtrckr-steps="5"] li {
+    width: 19%;
+}
+
+ol.progtrckr[data-progtrckr-steps="6"] li {
+    width: 16%;
+}
+
+ol.progtrckr[data-progtrckr-steps="7"] li {
+    width: 14%;
+}
+
+ol.progtrckr[data-progtrckr-steps="8"] li {
+    width: 12%;
+}
+
+ol.progtrckr[data-progtrckr-steps="9"] li {
+    width: 11%;
+}
+
+ol.progtrckr li.progtrckr-done {
+    color: black;
+    border-bottom: 4px solid yellowgreen;
+}
+
+ol.progtrckr li.progtrckr-todo {
+    color: silver;
+    border-bottom: 4px solid silver;
+}
+
+ol.progtrckr li:after {
+    content: "\00a0\00a0";
+}
+
+ol.progtrckr li:before {
+    position: relative;
+    bottom: -2.5em;
+    float: left;
+    left: 50%;
+    line-height: 1em;
+}
+
+ol.progtrckr li.progtrckr-done:before {
+    content: "\2713";
+    color: white;
+    background-color: yellowgreen;
+    height: 2.2em;
+    width: 2.2em;
+    line-height: 2.2em;
+    border: none;
+    border-radius: 2.2em;
+}
+
+ol.progtrckr li.progtrckr-todo:before {
+    content: "\039F";
+    color: silver;
+    background-color: white;
+    font-size: 2.2em;
+    bottom: -1.2em;
+}
+
+.container-fluid {
+    background-color: red;
+}
+
+.media-body {
+    font-family: 'Muli';
+}
