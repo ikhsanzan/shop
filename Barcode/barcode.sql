@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 10, 2020 at 03:01 PM
+-- Generation Time: Jul 11, 2020 at 08:22 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.30
 
@@ -40,12 +40,28 @@ CREATE TABLE `alamat_pelanggan` (
 
 CREATE TABLE `data_pelanggan` (
   `id` int(11) NOT NULL,
-  `nama` varchar(50) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(250) NOT NULL,
   `password` varchar(250) NOT NULL,
   `alamat` varchar(250) NOT NULL,
   `no_hp` varchar(250) NOT NULL,
-  `email` varchar(250) NOT NULL
+  `level` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `data_pelanggan`
+--
+
+INSERT INTO `data_pelanggan` (`id`, `username`, `email`, `password`, `alamat`, `no_hp`, `level`) VALUES
+(1, 'sadsadasd', 'sda', 'sa', 'sa', 'das', '0'),
+(2, 's', 's', '$2y$10$zLtcakgxgBgl/pA9NADFCevxma9H9meMRDEruU53.XQZFHCPIxQgq', 'sm', 's', '0'),
+(3, 's', 's', '$2y$10$DzbWVUvWCDKglt4.8xoKvO.Ct2BljdpGnDkPJ2/KeuMVVrjAYN4ey', 'sm', 's', '0'),
+(5, 'aji', 'aji', '$2y$10$Kxoi7kBfqSNy0LFNxg2iYe9k/s9dcmGvqAKdJ5dQ7EWZM1wKKpy3y', 'aji', '21', '0'),
+(6, 'mumu', 'mumu', '$2y$10$LO2LQDzSadz/1v4d5h.QeOvKzjuUwz1fRDWXxz6duFqCV52MARud.', 'muum', 'q', 'user'),
+(7, '1', '1', '$2y$10$3JGCb7.nc3u6t6X5UQMy7.q4aon2yqu/kK4sOPcD4qeuoisXmxfpi', '1', '1', 'user'),
+(8, '1', '1', '$2y$10$ihvXJIa0gYPG88d74HEtvuKqbWTjUawkkLIS7xGMSgmm1h6wFKiYS', '1', '1', 'user'),
+(9, '1', '1', '$2y$10$NzuyMA.bpHPguzzttB4Q0.QHksp0LLUevqSd97Kmf63zWfzke3uHe', '1', '1', 'user'),
+(10, 'hellosan', '1', '$2y$10$fSgylUvaPCVpRMFIi4l/0.KNDoQW5AI7wFgCF3LM3MKisMcCMcj9i', 'S', 'S', 'user');
 
 -- --------------------------------------------------------
 
@@ -149,7 +165,7 @@ ALTER TABLE `alamat_pelanggan`
 -- AUTO_INCREMENT for table `data_pelanggan`
 --
 ALTER TABLE `data_pelanggan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `galleries`
