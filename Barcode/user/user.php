@@ -1,92 +1,165 @@
 <?php
 session_start();
+include '../core/core.php';
+// include '../function/cek_login.php'
 
-require_once '../core/koneksi.php';
-require_once '../function/Produk_Function.php';
-// include_once '../core/core.php';
-// require_once 'core/core.php';
-
-$dataproduk = query("SELECT * FROM `produk`");
 ?>
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IM Parfum </title>
     <link rel="stylesheet" href="../asset/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Muli&family=Open+Sans&family=Roboto&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
-    <title>IM Parfum</title>
 </head>
 
 <body>
-    <!-- Header -->
-    <!-- <div class="container"> -->
-    <ul class="nav justify-content-end">
-        <li class="nav-item">
-            <a class="nav-link active" href="login.html">Masuk</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="profile.php">Profile</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Logout</a>
-        </li>
-    </ul>
 
-    <!-- Hero -->
+    <!-- Header -->
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="index.php">Logo IM Parfum</a>
+
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="cart.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <span id="cart-item" class="badge badge-danger"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout.php">Keluar</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Content Main -->
     <div class="hero-image">
         <div class="hero-text">
             <h1>I am Parfum</h1>
             <p>Temukan Parfum Terbaik Anda Disini</p>
             <a href="#targetname"><button>Belanja Sekarang</button></a>
-
-
         </div>
     </div>
 
-<br>
-<h1 class="display-5 text-center">Hello, Ibu <?php echo $_SESSION['username']; ?> Ini Adalah Statistik Berat Badan Bayi Ibu</h1>
 
-    <a name="targetname"></a>
     <!-- Content -->
-    <div class="container mt-5">
+    <div class="container pt-4">
+        <div id="message"></div>
+        <a name="targetname"></a>
         <div class="row">
-           
             <?php $i = 1; ?>
-            <?php foreach ($dataproduk as $produk) : ?>
-                <div class="col-md-4">
+            <?php
+            include '../config.php';
+            $stmt = $conn->prepare("select * from product");
+            $stmt->execute();
+            $result = $stmt->get_result();
+            while ($row = $result->fetch_assoc()) :
+            ?>
+                <div class="col-md-4 pb-4">
                     <div class="card pb-2">
-
-                        <img src="../admin/upload/<?= $produk['gambar'] ?>" class="card-img-top p-2" height="300px">
+                        <img src="<?= $base_url ?>admin/upload/<?= $row['product_image'] ?>" class="card-img-top p-2" height="300px" width="300px">
                         <div class="card-body">
-                            <h5 class="card-title"><?= $produk["nama_produk"]  ?></h5>
-                            <p class="card-text"><?=  $produk["harga"]  ?></p>
-                            <label for="berat"><?=  $produk["berat"]  ?></label>
-                            <p class="card-text"><small class="text-muted"><button type="button" class="btn btn-secondary">Tambah Ke Keranjang</button>
-                                </small></p>
+                            <h4 class="card-title text-center ">
+                                <?= $row['product_name']; ?>
+                            </h4>
+                            <h5 class="card-text text-center text-danger ">Rp
+                                <?= number_format($row['product_price'], 2) ?>/-
+                            </h5>
+                            <h6 class="card-text text-center ">
+                                <?=$row['product_weight'] ?>
+                            </h6>
+                        </div>
+                        <div class="card-footer p-1">
+                            <form action="" method="post" class="form-submit">
+                                <input type="hidden" class="pid" name="" value="<?= $row['id'] ?>">
+                                <input type="hidden" class="pname" name="" value="<?= $row['product_name'] ?>">
+                                <input type="hidden" class="pprice" name="" value="<?= $row['product_price'] ?>">
+                                <input type="hidden" class="pimage" name="" value="<?= $row['product_image'] ?>">
+                                <input type="hidden" class="pcode" name="" value="<?= $row['product_code'] ?>">
 
+                                <button class="btn btn-info btn-block addItemBtn">
+                                    <i class="fas fa-cart-plus"></i> &nbsp;
+                                    Tambah Ke Keranjang
+                                </button>
+                            </form>
+                            <!-- <a href="action.php?id=<?= $row['id'] ?>"  ></a> -->
                         </div>
                     </div>
                 </div>
                 <?php $i++; ?>
-
-            <?php endforeach; ?>
-            
+            <?php endwhile; ?>
         </div>
     </div>
-    <br><br>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".addItemBtn").click(function(e) {
+                e.preventDefault();
+                var $form = $(this).closest(".form-submit");
+                var pid = $form.find(".pid").val();
+                var pname = $form.find(".pname").val();
+                var pprice = $form.find(".pprice").val();
+                var pimage = $form.find(".pimage").val();
+                var pcode = $form.find(".pcode").val();
+
+
+                $.ajax({
+                    url: 'action.php',
+                    method: 'post',
+                    data: {
+                        pid: pid,
+                        pname: pname,
+                        pprice: pprice,
+                        pimage: pimage,
+                        pcode: pcode
+                    },
+                    success: function(response) {
+                        $("#message").html(response);
+                        load_cart_item_number();
+
+                    }
+                });
+            });
+
+            load_cart_item_number();
+
+            function load_cart_item_number() {
+                $.ajax({
+                    url: 'action.php',
+                    method: 'get',
+                    data: {
+                        cartItem: "cart_item"
+                    },
+                    success: function(response) {
+                        $("#cart-item").html(response);
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -20,7 +20,7 @@ if (hapus ($id) > 0){
     echo "
     <script>
         alert('data tidak berhasil di hapus!');
-        document.location.href = 'cruddatabayi.php';
+        document.location.href = 'admin.php';
 
     </script>
 

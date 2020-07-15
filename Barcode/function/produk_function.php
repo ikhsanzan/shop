@@ -1,10 +1,9 @@
 <?php 
 
 // require_once '../core/koneksi.php';
-$conn = mysqli_connect("localhost", "root", "", "barcode");
+$conn = mysqli_connect("localhost", "root", "", "cart_system");
 
-function query($query)
-{
+function query($query){
     global $conn;
     $result = mysqli_query($conn, $query);
     $rows = [];
@@ -20,21 +19,21 @@ function tambah($data){
     
     global $conn;
 
-    $id_barcode = (htmlspecialchars(mysqli_real_escape_string($conn,$data["id_barcode"])));
+    $id_barcode = (htmlspecialchars(mysqli_real_escape_string($conn,$data["product_code"])));
     // $gambar = (htmlspecialchars(mysqli_real_escape_string($conn,$data["gambar"])));
     //upload gambar
-     $gambar = upload();
-    if (!$gambar) {
+     $product_image = upload();
+    if (!$product_image) {
           return false;
     }
-    $nama_produk = (htmlspecialchars(mysqli_real_escape_string($conn,$data["nama_produk"])));
-    $harga = (htmlspecialchars(mysqli_real_escape_string($conn,$data["harga"])));
-    $berat = (htmlspecialchars(mysqli_real_escape_string($conn,$data["berat"])));
-    $stok_barang = (htmlspecialchars(mysqli_real_escape_string($conn,$data["stok_barang"])));
+    $nama_produk = (htmlspecialchars(mysqli_real_escape_string($conn,$data["product_name"])));
+    $harga = (htmlspecialchars(mysqli_real_escape_string($conn,$data["product_price"])));
+    $berat = (htmlspecialchars(mysqli_real_escape_string($conn,$data["product_weight"])));
+    $stock = (htmlspecialchars(mysqli_real_escape_string($conn,$data["product_quantity"])));
 
-    $query = "INSERT INTO `produk` (`id`, `id_barcode`, `gambar`, `nama_produk`, `harga`, `berat`, 
-    `stok_barang`) 
-    VALUES (NULL, '$id_barcode', '$gambar', '$nama_produk', '$harga', '$berat', '$stok_barang')";
+
+    $query = "INSERT INTO `product` (`id`, `product_code`, `product_image`, `product_name`, `product_price`, `product_weight` , `product_quantity`) 
+    VALUES (NULL, '$id_barcode', '$product_image', '$nama_produk', '$harga', '$berat', '$stock' )";
 
     return mysqli_query($conn, $query);
     //  mysqli_affected_rows($conn);
@@ -44,10 +43,10 @@ function tambah($data){
 //Upload Gambar Produk
 function upload()
 {
-    $namaFile = $_FILES['gambar']['name'];
-    $ukuranFile = $_FILES['gambar']['size'];
-    $error = $_FILES['gambar']['error'];
-    $tmpName = $_FILES['gambar']['tmp_name'];
+    $namaFile = $_FILES['product_image']['name'];
+    $ukuranFile = $_FILES['product_image']['size'];
+    $error = $_FILES['product_image']['error'];
+    $tmpName = $_FILES['product_image']['tmp_name'];
     //cek
     if ($error === 4) {
         echo "<script> 
@@ -87,24 +86,25 @@ function ubah($data)
 
     global $conn;
     $id = $data['id'];
-    $id_barcode = (htmlspecialchars(mysqli_real_escape_string($conn,$data["id_barcode"])));
-    $gambar = (htmlspecialchars(mysqli_real_escape_string($conn,$data["gambar"])));
+
+    $id_barcode = (htmlspecialchars(mysqli_real_escape_string($conn,$data["product_code"])));
+    // $product_image = (htmlspecialchars(mysqli_real_escape_string($conn,$data["product_image"])));
     //upload gambar
-    //  $gambar = upload();
-    // if (!$gambar) {
-    //       return false;
-    // }
-    $nama_produk = (htmlspecialchars(mysqli_real_escape_string($conn,$data["nama_produk"])));
-    $harga = (htmlspecialchars(mysqli_real_escape_string($conn,$data["harga"])));
-    $berat = (htmlspecialchars(mysqli_real_escape_string($conn,$data["berat"])));
-    $stok_barang = (htmlspecialchars(mysqli_real_escape_string($conn,$data["stok_barang"])));
+     $product_image = upload();
+    if (!$product_image) {
+          return false;
+    }
+    $nama_produk = (htmlspecialchars(mysqli_real_escape_string($conn,$data["product_name"])));
+    $harga = (htmlspecialchars(mysqli_real_escape_string($conn,$data["product_price"])));
+    $berat = (htmlspecialchars(mysqli_real_escape_string($conn,$data["product_weight"])));
+
      
-    $query = "UPDATE `produk` SET `id_barcode` = '$id_barcode',`gambar` = '$gambar',
-     `nama_produk` = '$nama_produk',
-     `harga` = '$harga',
-     `berat` = '$berat',
-     `stok_barang` = '$stok_barang'
-     WHERE `produk`.`id` = $id";
+    $query = "UPDATE `product` SET `product_code` = '$id_barcode',
+     `product_image` = '$product_image',
+     `product_name` = '$nama_produk',
+     `product_price` = '$harga',
+    `product_weight` = '$berat'
+     WHERE `product`.`id` = $id";
     return mysqli_query($conn, $query);
 
 
@@ -116,7 +116,7 @@ function hapus($id){
     global $conn;
 
 
-    $delete ="DELETE FROM `produk` WHERE `produk`.`id` = $id";
+    $delete ="DELETE FROM `product` WHERE `product`.`id` = $id";
     return mysqli_query($conn, $delete);
 
 }

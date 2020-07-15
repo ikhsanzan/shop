@@ -1,5 +1,7 @@
 <?php 
 
+$app_path = $_SERVER['DOCUMENT_ROOT'];
+$app_path = $_SERVER['DOCUMENT_ROOT']."/barcode/";
+$base_url = 'http://localhost/revisishop/';
 
-
-$base_url = 'http://localhost/barcode/';
+// echo $app_path;

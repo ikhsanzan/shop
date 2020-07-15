@@ -1,18 +1,18 @@
-<?php 
+<?php
 
-// require_once '../core/koneksi.php';
-// require_once '../function/Produk_Function.php';
 include_once '../core/core.php';
+include '../function/produk_function.php';
 
 
 $id = abs(intval($_GET["id"]));
-// var_dump($id);
 
-$dataproduk = query("SELECT * FROM produk WHERE id = $id")[0];
+
+
+$dataproduk = query("SELECT * FROM product WHERE id = $id")[0];
 
 if (isset($_POST["edit-data-produk"])) {
 
-    if (ubah($_POST )) {
+    if (ubah($_POST)) {
         # code...
         // echo "data berhasil di tambahkan";  
         echo "
@@ -23,8 +23,8 @@ if (isset($_POST["edit-data-produk"])) {
 
         ";
     } else {
-        // mysqli_error($conn);
-        // echo "tes";
+        // echo mysqli_error($conn);
+        // // echo "tes";
         // die();
         echo "data gagal di tambahkan";
     }
@@ -48,57 +48,63 @@ if (isset($_POST["edit-data-produk"])) {
 </head>
 
 <body>
-    <!-- Header -->
-    <!-- <div class="container"> -->
-    <ul class="nav justify-content-end">
-        <li class="nav-item">
-            <a class="nav-link active" href="login.html">Masuk</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Daftar</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Scan Barcode</a>
-        </li>
-    </ul>
 
+    <!-- Header -->
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="index.php">Logo IM Parfum</a>
+
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="admin.php">Daftar Barang</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout.php">Keluar</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
     <!-- Content -->
 
     <br>
 
-    <div class="container">
+    <div class="container mt-4">
         <div class="card">
             <h5 class="card-header">Halaman Edit Produk</h5>
             <div class="card-body">
                 <div class="container">
-                    <form method="post" action=""  enctype="multipart/form-data" >
-                    <input type="hidden" name="id" value="<?= $dataproduk["id"] ?>">
+                    <form method="post" action="" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="<?= $dataproduk["id"] ?>">
 
                         <div class="form-group">
-                            <label for="id_barcode">Kode Barcode Produk	</label>
-                            <input type="text" class="form-control" name="id_barcode" id="id_barcode" value="<?= $dataproduk['id_barcode']; ?>">
+                            <label for="product_code">Kode Barcode Produk </label>
+                            <input type="text" class="form-control" name="product_code" id="product_code" value="<?= $dataproduk['product_code']; ?>">
                         </div>
                         <div class="form-group">
-                            <label for="gambar">Gambar Produk	</label><br>
-                            <input type="text" id="gambar" name="gambar" value="<?= $dataproduk['gambar']; ?>">
+                            <label for="product_image">Gambar Produk </label><br>
+                            <input type="file" id="product_image" name="product_image" value="<?= $dataproduk['product_image']; ?>">
                         </div>
                         <div class="form-group">
-                            <label for="nama_produk">Nama Produk		</label>
-                            <input type="text" class="form-control" name="nama_produk" id="nama_produk" value="<?= $dataproduk['nama_produk']; ?>" id="nama-produk" >
+                            <label for="product_name">Nama Produk </label>
+                            <input type="text" class="form-control" name="product_name" id="product_name" value="<?= $dataproduk['product_name']; ?>">
                         </div>
                         <div class="form-group">
-                            <label for="harga">Harga Produk		</label>
-                            <input type="text" class="form-control" name="harga" id="harga"  id="harga" value="<?= $dataproduk['harga']; ?>" id="nama" >
+                            <label for="product_price">Harga Produk </label>
+                            <input type="number" class="form-control" name="product_price" value="<?= $dataproduk['product_price']; ?>" id="product_price">
                         </div>
                         <div class="form-group">
-                            <label for="berat">Berat Produk		</label>
-                            <input type="text" class="form-control" name="berat" id="berat"  id="berat" value="<?= $dataproduk['harga']; ?>" id="nama" >
+                            <label for="product_weight	">Berat Produk </label>
+                            <input type="text" class="form-control" name="product_weight" value="<?= $dataproduk['product_weight']; ?>" id="product_weight">
                         </div>
 
-                        <div class="form-group">
-                            <label for="stok_barang">Stok Produk	</label>
-                            <input type="number" class="form-control" name="stok_barang"  value="<?= $dataproduk['stok_barang']; ?>" id="stok_barang" >
-                        </div>
 
                         <button type="submit" name="edit-data-produk" class="btn btn-primary form-control ">Simpan Produk</button>
                     </form>

@@ -1,48 +1,52 @@
 <?php 
-    // require_once '../core/koneksi.php';
-    // require_once '../function/Produk_Function.php';
+    
 
     include_once '../core/core.php';
+    include '../function/produk_function.php';
 
-    $dataproduk = query("SELECT * FROM `produk`");
+    $dataproduk = query("SELECT * FROM `product`");
+
+
 ?>
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../asset/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Muli&family=Open+Sans&family=Roboto&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IM Parfum </title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-    <title>Halaman Admin</title>
 </head>
 
 <body>
-    <!-- Header -->
-    <!-- <div class="container"> -->
-    <ul class="nav justify-content-end">
-        <li class="nav-item">
-            <a class="nav-link active" href="login.html">Masuk</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Daftar</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Scan Barcode</a>
-        </li>
-    </ul>
+
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="index.php">Logo IM Parfum</a>
+
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+              
+                <li class="nav-item">
+                    <a class="nav-link" href="logout.php">Keluar</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
 
     <!-- Content -->
-
-    <br>
-
-    <div class="container">
+    <div class="container mt-4">
         <div class="card">
             <h5 class="card-header">Kelola Produk</h5>
             <div class="card-body">
@@ -77,16 +81,16 @@
                              <?php foreach ($dataproduk as $produk) : ?>
                                 <tr>
                                     <th><?= $i ?></th>
-                                    <td><?=  $produk["id_barcode"]  ?></td>
+                                    <td><?=  $produk["product_code"]  ?></td>
                                     <!-- <td><?=  $produk["gambar"]  ?></td> -->
-                                    <td><img class="card-img-top img"  src="<?= $base_url ?>admin/upload/<?= $produk['gambar'] ?>"  height="300px" width="300px"></td>
-                                    <td><?=  $produk["nama_produk"]  ?></td>
-                                    <td><?=  $produk["harga"]  ?></td>
-                                    <td><?=  $produk["berat"]  ?></td>
-                                    <td><?=  $produk["stok_barang"]  ?></td>
+                                    <td><img class="card-img-top img"  src="<?= $base_url ?>admin/upload/<?= $produk['product_image'] ?>"  height="350px" ></td>
+                                    <td><?=  $produk["product_name"]  ?></td>
+                                    <td><?=  $produk["product_price"]  ?></td>
+                                    <td><?=  $produk["product_weight"]  ?></td>
+                                    <td><?=  $produk["product_quantity"]  ?></td>
                                    
                                     <td style="text-align: center;">
-                                        <a href="edit-produk.php?id=<?= $produk["id"] ?>" class="mr-4">Ubah</a>
+                                        <a href="edit-produk.php?id=<?= $produk["id"] ?>" class="mr-2">Ubah</a>
                                         <a href="hapus-produk.php?id=<?= $produk["id"] ?> "onclick="return confirm('yakin');">Hapus</a>
 
                                     </td>

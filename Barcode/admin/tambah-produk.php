@@ -5,6 +5,8 @@
 // require_once '../function/Produk_Function.php';
 
 include_once '../core/core.php';
+include '../function/produk_function.php';
+
 
 
 if (isset($_POST["tambah-data-produk"])) {
@@ -45,18 +47,28 @@ if (isset($_POST["tambah-data-produk"])) {
 
 <body>
     <!-- Header -->
-    <!-- <div class="container"> -->
-    <ul class="nav justify-content-end">
-        <li class="nav-item">
-            <a class="nav-link active" href="login.html">Masuk</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Daftar</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Scan Barcode</a>
-        </li>
-    </ul>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="index.php">Logo IM Parfum</a>
+
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="admin.php">Daftar Barang</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout.php">Keluar</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
 
     <!-- Content -->
 
@@ -69,29 +81,30 @@ if (isset($_POST["tambah-data-produk"])) {
                 <div class="container">
                     <form action="" method="post"  enctype="multipart/form-data" >
                         <div class="form-group">
-                            <label for="id_barcode">Kode Barcode Produk	</label>
-                            <input type="text" class="form-control" name="id_barcode" id="id_barcode" aria-describedby="emailHelp">
+                            <label for="product_code">Kode Barcode Produk	</label>
+                            <input type="text" class="form-control" name="product_code" id="product_code">
                         </div>
                         <div class="form-group">
-                            <label for="gambar">Gambar Produk	</label><br>
-                            <input type="file" id="gambar" name="gambar">
+                            <label for="product_image">Gambar Produk	</label><br>
+                            <input type="file" id="product_image" name="product_image">
                         </div>
                         <div class="form-group">
-                            <label for="nama_produk">Nama Produk		</label>
-                            <input type="text" class="form-control" name="nama_produk" id="nama_produk" aria-describedby="textHelp">
+                            <label for="product_name">Nama Produk		</label>
+                            <input type="text" class="form-control" name="product_name" id="product_name" >
                         </div>
                         <div class="form-group">
-                            <label for="harga">Harga Produk		</label>
-                            <input type="text" class="form-control" name="harga" id="harga" aria-describedby="textHelp">
+                            <label for="product_price">Harga Produk		</label>
+                            <input type="number" class="form-control" name="product_price" id="product_price" >
                         </div>
                         <div class="form-group">
-                            <label for="berat">Berat Produk		</label>
-                            <input type="text" class="form-control" name="berat" id="berat" aria-describedby="textHelp">
+                            <label for="product_weight">Berat Produk		</label>
+                            <input type="text" class="form-control" name="product_weight" id="product_weight" >
                         </div>
                         <div class="form-group">
-                            <label for="stok_barang">Stok Produk	</label>
-                            <input type="number" class="form-control" name="stok_barang" id="stok_barang" aria-describedby="emailHelp">
+                            <label for="product_quantity">Stock Produk		</label>
+                            <input type="number" class="form-control" name="product_quantity" id="product_quantity" >
                         </div>
+                       
 
                         <button type="submit" name="tambah-data-produk" class="btn btn-primary form-control">Simpan Produk</button>
                     </form>
