@@ -107,8 +107,8 @@ include '../core/core.php';
                                     <td>Rp &nbsp;&nbsp; <?= number_format($row['product_price'], 2); ?></td>
                                     <input type="hidden" class="pprice" value="<?= $row['product_price'] ?>" name="">
                                     <td>
-                                        <h1><?= $row['product_quantity'] ?></h1>
-                                        <input data-quantity="<?= $row['product_quantity'] ?>" type="number" name="" class="form-control itemQty"  id="" value="<?= $row['qty'] ?>" style="width:75px">
+                                        <h1><?= $row['qty'] ?></h1>
+                                        <input data-quantity=<?php echo mysqli_fetch_assoc(mysqli_query($conn,"SELECT product_quantity FROM product WHERE product_name = '$row[product_name]' "))['product_quantity'] ?> type="number" name="" class="form-control itemQty"  id="" value="<?= $row['qty'] ?>" style="width:75px">
                                     </td>
                                     <td>Rp &nbsp;&nbsp; <?= number_format($row['total_price'], 2); ?></td>
                                     <td>
@@ -161,24 +161,37 @@ include '../core/core.php';
                 var pid = $el.find(".pid").val();
                 var pprice = $el.find(".pprice").val();
                 var qty = $el.find(".itemQty").val();
-                location.reload(true);
+                
 
-                $.ajax({
-                    url: 'action.php',
-                    method: 'post',
-                    cache: false,
-                    data: {
-                        qty: qty,
-                        pid: pid,
-                        pprice: pprice
-                    },
-                    success: function(response) {
-                        console.log(qty);
-                        console.log(response);
+                
+                const itemQty = document.querySelectorAll('.itemQty');
+                itemQty.forEach(e => {
+                    if(e.value < e.dataset.quantity){
+                        $.ajax({
+                            url: 'action.php',
+                            method: 'post',
+                            cache: false,
+                            data: {
+                                qty: qty,
+                                pid: pid,
+                                pprice: pprice
+                            },
+                            success: function(response) {
+                                location.reload(true);
+                                console.log(qty);
+                                console.log(response);
 
+                            }
+                        });
+                    }else{
+                        e.value = e.dataset.quantity - 1;
+                        alert('Sisa stok barang hanya ' + e.dataset.quantity);
+                        
                     }
                 });
             });
+
+           
 
             function load_cart_item_number() {
                 $.ajax({
@@ -193,6 +206,9 @@ include '../core/core.php';
                 });
             }
         });
+    </script>
+    <script>
+        
     </script>
 </body>
 

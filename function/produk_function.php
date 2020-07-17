@@ -1,7 +1,7 @@
 <?php 
 
 // require_once '../core/koneksi.php';
-$conn = mysqli_connect("localhost", "root", "", "cart_system");
+$conn = mysqli_connect("localhost", "root", "pemudakoding", "cart_system");
 
 function query($query){
     global $conn;

@@ -1,6 +1,6 @@
 <?php
 
-$conn = mysqli_connect("localhost", "root", "pemudakoding", "barcode");
+$conn = mysqli_connect("localhost", "root", "pemudakoding", "cart_system") or die('test');
 
 
 

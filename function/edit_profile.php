@@ -1,6 +1,6 @@
 <?php
 
-$conn = mysqli_connect("localhost", "root", "", "barcode");
+$conn = mysqli_connect("localhost", "root", "pemudakoding", "barcode");
 
 function query($query){
     global $conn;
